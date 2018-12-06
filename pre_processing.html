@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Pre-processing &#8212; pyXem 0.6 documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Post-facto Imaging" href="imaging.html" />
+    <link rel="prev" title="Architecture &amp; Conventions" href="architecture.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          pyXem</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.6</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture &amp; Conventions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pre-processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imaging.html">Post-facto Imaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unsupervised_learning.html">Unsupervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase_orientation_mapping.html">Phase &amp; Orientation Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strain_mapping.html">Strain Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="literature.html">Citing Literature</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Pre-processing</a><ul>
+<li><a class="reference internal" href="#alignment-corrections-calibration">Alignment, Corrections &amp; Calibration</a></li>
+<li><a class="reference internal" href="#radial-integration">Radial Integration</a></li>
+<li><a class="reference internal" href="#background-removal">Background Removal</a></li>
+<li><a class="reference internal" href="#peak-finding">Peak Finding</a><ul>
+<li><a class="reference internal" href="#zaefferer">Zaefferer</a></li>
+<li><a class="reference internal" href="#stat">Stat</a></li>
+<li><a class="reference internal" href="#matrix-methods">Matrix Methods</a></li>
+<li><a class="reference internal" href="#cross-correlation">Cross Correlation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="architecture.html" title="Previous Chapter: Architecture & Conventions"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Architecture ...</span>
+    </a>
+  </li>
+  <li>
+    <a href="imaging.html" title="Next Chapter: Post-facto Imaging"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Post-facto Imaging &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="pre-processing">
+<h1>Pre-processing<a class="headerlink" href="#pre-processing" title="Permalink to this headline">¶</a></h1>
+<p>Experimental parameters associated with the data acquisition can be stored in
+metadata using one of the methods of the ElectronDiffraction class, as shown below</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">set_experimental_parameters</span><span class="p">(</span><span class="n">accelerating_voltage</span><span class="o">=</span><span class="mf">300.</span><span class="p">,</span>
+<span class="go">                                   camera_length=21.,</span>
+<span class="go">                                   scan_rotation=277.,</span>
+<span class="go">                                   convergence_angle=0.7,</span>
+<span class="go">                                   exposure_time=10.)</span>
+</pre></div>
+</div>
+<div class="section" id="alignment-corrections-calibration">
+<h2>Alignment, Corrections &amp; Calibration<a class="headerlink" href="#alignment-corrections-calibration" title="Permalink to this headline">¶</a></h2>
+<p>Experimental artifacts in 4D-S(P)ED commonly include: (1) geometric distortions
+due to projection optics, (2) small translations of the direct beam in the
+diffraction plane, and (3) recorded intensities that depend on the response of
+the detector. Methods to correct these effects to a first order approximation
+are made available in pyXem.</p>
+<p>Projection distortions may be (approximately) corrected by the application of an
+opposite image distortion, often an affine transformation, to all recorded
+diffraction patterns. The appropriate transformation may be determined using
+diffraction patterns acquired from a reference sample and then applied using
+<a class="reference internal" href="pyxem.signals.html#pyxem.signals.electron_diffraction.ElectronDiffraction.apply_affine_transformation" title="pyxem.signals.electron_diffraction.ElectronDiffraction.apply_affine_transformation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply_affine_transformation()</span></code></a>. E.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">apply_affine_transformation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.99</span><span class="p">,</span><span class="mi">0</span>   <span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="go">                                             [0   ,0.69,0],</span>
+<span class="go">                                             [0   ,0   ,1]]))</span>
+</pre></div>
+</div>
+<p>Translation of the direct beam is corrected for by aligning the stack of
+diffraction patterns. This can be achieve with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">center_direct_beam</span><span class="p">(</span><span class="n">radius_start</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">radius_finish</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This method has two mandatory arguments, you can find out more about these by inspecting the relevant docstrings.</p>
+<p>Intensity corrections most simply involve gain normalization based on
+dark-reference and bright-reference images. Such gain normalization may be
+performed in pyXem using <a class="reference internal" href="pyxem.signals.html#pyxem.signals.electron_diffraction.ElectronDiffraction.apply_gain_normalisation" title="pyxem.signals.electron_diffraction.ElectronDiffraction.apply_gain_normalisation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply_gain_normalisation()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">apply_gain_normalisation</span><span class="p">(</span><span class="n">bref</span><span class="o">=</span><span class="n">bright_reference</span><span class="p">,</span> <span class="n">dref</span><span class="o">=</span><span class="n">dark_reference</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Following alignment and the application of necessary corrections to the data (ESSENTIAL DO NOT SKIP!), one
+may be calibrate the signals. Methods exist to apply calibrations to the diffraction and scan axes respectively.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">set_diffraction_calibration</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">set_scan_calibration</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The diffraction axes should be calibrated in A^{-1}/px and the scan
+axes should be calibrated in nm/px.</p>
+</div>
+</div>
+<div class="section" id="radial-integration">
+<h2>Radial Integration<a class="headerlink" href="#radial-integration" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="pyxem.signals.html#pyxem.signals.electron_diffraction.ElectronDiffraction.get_radial_profile" title="pyxem.signals.electron_diffraction.ElectronDiffraction.get_radial_profile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_radial_profile()</span></code></a> method integrates every
+two-dimensional electron diffraction pattern about its geometric center and is applied as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">get_radial_profile</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The result is a one-dimensional plot of diffracted intensity as a function of
+scattering angle. This will not work if you fail to center all of the patterns in your S(P)ED scan.</p>
+</div>
+<div class="section" id="background-removal">
+<h2>Background Removal<a class="headerlink" href="#background-removal" title="Permalink to this headline">¶</a></h2>
+<p>Background subtraction is important for extracting accurate diffracted
+intensities and achieving reliable pattern matching or peak finding. The aims in
+these two cases are significantly different. Background subtraction may be
+achieved in pyXem via the <a class="reference internal" href="pyxem.signals.html#pyxem.signals.electron_diffraction.ElectronDiffraction.remove_background" title="pyxem.signals.electron_diffraction.ElectronDiffraction.remove_background"><code class="xref py py-meth docutils literal notranslate"><span class="pre">remove_background()</span></code></a>
+method, which has multiple options.</p>
+<p>The background may be modelled by fitting a model to the radial profile of the
+diffraction data. The model may then be made ciruclarly symmetric and subtracted.
+Numerous models could in principle be used and one option that has been useful
+for data acquired on fluorescent screens, but is difficult to justify physically,
+contains a Lorentzian to model the direct beam, an exponential function to
+model the tail of diffuse scattering, and a first order polynomial to model
+slower decay at higher scattering angles. This is applied as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">remove_background</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Backgound modelling, as described above yields the following:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/background_model.png"><img alt="_images/background_model.png" src="_images/background_model.png" style="width: 600px;" /></a>
+</div>
+<p>Background removal based on morphological operations provides a fast and
+versatile method for removing non-smooth background. A so-called h-dome method
+is implemented here. This involves forming a ‘seed’ image by subtracting a
+constant offset, h, from the raw image. A morphological reconstruction by
+dilatation is then performed in which high-intensity values replace nearby low
+intensity values. The seed image specifies the values that are subject to
+dilatation and the raw image specifies the maximum value at each pixel. The
+reconstructed image then appears similar to the original image but with peak
+above the h value cut off.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">remove_background</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;h-dome&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Morphological background removal, as described above yields the following:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/background_morphological.png"><img alt="_images/background_morphological.png" src="_images/background_morphological.png" style="width: 600px;" /></a>
+</div>
+</div>
+<div class="section" id="peak-finding">
+<h2>Peak Finding<a class="headerlink" href="#peak-finding" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="pyxem.signals.html#pyxem.signals.electron_diffraction.ElectronDiffraction.find_peaks" title="pyxem.signals.electron_diffraction.ElectronDiffraction.find_peaks"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_peaks()</span></code></a> method provides access to a
+number of algorithms for that achieve peak finding in electron diffraction
+patterns. There are currently five methods avaliable, a good place to start
+though is to run the interactive peakfinder in a Jupyter Notebook</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">find_peaks_interactive</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Many of the peak finding algorithms implemented here have a number of tuneable
+parameters that significantly affect their accuracy and speed. Finding the
+correct parameters can be difficult. An interactive tool for the Jupyter
+notebook has been developed to help.</p>
+<p>Several widgets are available:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/interactive_peaks.png"><img alt="_images/interactive_peaks.png" src="_images/interactive_peaks.png" style="width: 600px;" /></a>
+</div>
+<ul class="simple">
+<li>The method selector is used to compare different methods. The last-set
+parameters are maintained.</li>
+<li>The signal navigator is used where a signal has navigation axes. The
+randomizer will select random indices.</li>
+<li>The parameter adjusters will update the parameters of the method and re-plot
+the new peaks.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some methods take significantly longer than others (the statistical method is particularly slow). The plotting window
+may be inactive during this time.</p>
+</div>
+<p>Running in a script is then simple.</p>
+<div class="section" id="zaefferer">
+<h3>Zaefferer<a class="headerlink" href="#zaefferer" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">find_peaks</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;zaefferer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This algorithm was developed by Zaefferer and the implementation here is after
+the description of the algorithm in the Ph.D. thesis of Thomas A. White. It is
+based on a gradient threshold followed by a local maximum search within a square
+window, which is moved until it is centered on the brightest point, which is
+taken as a peak if it is within a certain distance of the starting point.</p>
+</div>
+<div class="section" id="stat">
+<h3>Stat<a class="headerlink" href="#stat" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">find_peaks</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;stat&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Developed by Gordon Ball, and described in the Ph.D. thesis of Thomas A.
+White, this method is based on finding points which have a statistically
+higher value than the surrounding areas, then iterating between smoothing and
+binarising until the number of peaks has converged. This method is slow, but
+very robust to a variety of image types.</p>
+</div>
+<div class="section" id="matrix-methods">
+<h3>Matrix Methods<a class="headerlink" href="#matrix-methods" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">find_peaks</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;laplacian_of_gaussians&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">find_peaks</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;difference_of_gaussians&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These methods are essentially wrappers around the
+<a class="reference external" href="http://scikit-image.org/docs/dev/auto_examples/plot_blob.html">scikit-image</a> Laplacian
+of Gaussian and Difference of Gaussian methods, based on stacking the
+Laplacian/difference of images convolved with Gaussian kernels of various
+standard deviations. Both are very rapid and relatively robust, given
+appropriate parameters.</p>
+</div>
+<div class="section" id="cross-correlation">
+<h3>Cross Correlation<a class="headerlink" href="#cross-correlation" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">disc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dp</span><span class="o">.</span><span class="n">find_peaks</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;xc&#39;</span><span class="p">,</span><span class="n">disc_image</span><span class="o">=</span><span class="n">disc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The final method is based on cross correlation, forming a thin wrapper over
+the template matching code avaliable in scikit-image <a class="reference external" href="http://scikit-image.org/docs/dev/auto_examples/features_detection/plot_template.html">http://scikit-image.org/docs/dev/auto_examples/features_detection/plot_template.html</a></p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright Copyright 2017-2018, Python Crystallographic Electron Microscopy.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
